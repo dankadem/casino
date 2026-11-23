@@ -76,10 +76,10 @@ def dealer_move(score):
 def win_calculate(data, score):
     if score[0] > 21: #Если перебор у кого-то - игра заканчивается сразу
         data['end'] = True
-        return "player busted" #bust - перебор
+        return "lose"
     if score[1] > 21:
         data['end'] = True
-        return "dealer busted"
+        return "win"
     if data['end']: #Когда дилер остановился, считаем очки
         if score[0] > score[1]:
             return "win"

@@ -1,6 +1,9 @@
 from src.blackjack import *
 from ui.blackjack_ui import *
+from ui.betting import *
 from ui.clear import clear #функция очистки экрана, в пайчарм не работает, только в комадной строке
+
+money = 10000
 
 #основной цикл
 while True:
@@ -8,6 +11,7 @@ while True:
     print('2 - Exit')
     choice = input()
     if choice == '1':
+        stake = place_bet(money, 'Blackjack')
         data = bj_start() #стартовая раздача
         scores = score(data)
         #цикл ходов игрока
@@ -26,6 +30,10 @@ while True:
             scores = score(data)
             result = win_calculate(data, scores)
         clear()
-        bj_end(data, scores, result)
+        if result == 'win':
+            money += stake
+        elif result == 'lose':
+            money -= stake
+        bj_end(data, scores, result, stake)
     else:
         break

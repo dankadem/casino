@@ -1,10 +1,10 @@
 #Функция рисования руки, рисует столько карт, сколько есть у игрока
 def print_hand(hand): #Принимает руку, которую будет рисовать
-    print("  ".join("|------|" for card in hand))
+    print("  ".join("--------" for card in hand))
     print("  ".join("|      |" for card in hand))
     print("  ".join(f"|{card[0] + card[1]:^6}|" for card in hand))
     print("  ".join("|      |" for card in hand))
-    print("  ".join("|------|" for card in hand))
+    print("  ".join("--------" for card in hand))
 
 #Функция отрисовки самой игры, при ходах игрока
 def bj_screen(data, score):
@@ -33,10 +33,14 @@ def bj_screen(data, score):
                 print("Invalid choice")
 
 #Отрисовка финального экрана, где показан итог игры
-def bj_end(data, score, result):
+def bj_end(data, score, result, stake):
     dealer_hand = data["dealer_hand"]
     player_hand = data["player_hand"]
     print("=G=A=M=E= =E=N=D=")
     print_hand(dealer_hand)
     print(f"\nScore: {score[1]} : {score[0]}, {result}")
     print_hand(player_hand)
+    if result == 'win':
+        print(f'+{stake}$')
+    elif result == 'lose':
+        print(f'-{stake}$')
